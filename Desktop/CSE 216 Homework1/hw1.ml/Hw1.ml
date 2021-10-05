@@ -20,7 +20,6 @@ let rec compress lst  =
     |[] -> []
     |[head] -> [head]
     |head :: head_of_tail::tail -> if head = head_of_tail then (compress(head_of_tail::tail)) else head::(compress(head_of_tail::tail));;
-  
 
 (*------------------Part 1 Q3---------------------*)  
 let rec remove_if lst p = 
@@ -87,7 +86,7 @@ let rec equiv_on f g lst : bool =
        false ;; 
 
 (*-----------------Part 1 Q8-----------------*)
-let rec pairwisefilter cmp lst  = 2
+let rec pairwisefilter cmp lst  = 
           match lst with 
           | [] -> []
           |[head] -> [head]
@@ -108,12 +107,7 @@ let rec powerset lst : 'a list =
   |[] -> []
   |head::tail -> [head] :: (powerset tail);;
 
-let rec powerset_helper lst : 'a list list  = 
-  match lst with 
-  |[[]] -> [[]]
-  |(_::_)::[]->[]
-  |[]::[] -> []
-  |head::next::tail -> [head@next] :: (powerset_helper (head::tail));;
+
 
 
 
