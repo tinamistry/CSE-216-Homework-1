@@ -7,6 +7,7 @@ public class Triangle implements TwoDShape, Positionable {
 
     public Triangle(List<TwoDPoint> vertices) {
         this.vertices = vertices;
+        setPosition(vertices);
         // TODO
     }
 
@@ -20,13 +21,13 @@ public class Triangle implements TwoDShape, Positionable {
      */
     @Override
     public void setPosition(List<? extends Point> points) {
-    Point c1 = points.get(0);
-    Point c2 = points.get(1);
-    Point c3 = points.get(2);
-    List <Point> triPoints = new ArrayList<Point>();
-    triPoints.add(c1);
-    triPoints.add(c2);
-    triPoints.add(c3);
+        Point c1 = points.get(0);
+        Point c2 = points.get(1);
+        Point c3 = points.get(2);
+        List<Point> triPoints = new ArrayList<Point>();
+        triPoints.add(c1);
+        triPoints.add(c2);
+        triPoints.add(c3);
 
         //first point
         int minIndex = findMin(triPoints, 0);
@@ -43,33 +44,29 @@ public class Triangle implements TwoDShape, Positionable {
         triPoints.set(minIndex, temp);
 
 
-
-    position.add(triPoints.get(0));
-    position.add(triPoints.get(1));
-    position.add(triPoints.get(2));
+        position.add(triPoints.get(0));
+        position.add(triPoints.get(1));
+        position.add(triPoints.get(2));
         // TODO
     }
-    public int findMin(List<Point> points, int x ) {
+
+    public int findMin(List<Point> points, int x) {
         Point min = points.get(x);// first unordered value in the list 0
         int minIndex = x; //0
-        double [] minCoordinate = min.coordinates(); //[] = [3.9, 2.0]
-        for(int i = x+1 ; i <= 2  ; i++){
+        double[] minCoordinate = min.coordinates(); //[] = [3.9, 2.0]
+        for (int i = x + 1; i <= 2; i++) {
             Point p = points.get(i); //get the next set of coordinates [2.0 3.0]
-            double [] current = p.coordinates(); //array of coordinates
-            if (current[0] < minCoordinate[0]){ //min[0] = 3.9 > 2.0 so minIndex = 1 since i = x = 0 + 1 = 1
+            double[] current = p.coordinates(); //array of coordinates
+            if (current[0] < minCoordinate[0]) { //min[0] = 3.9 > 2.0 so minIndex = 1 since i = x = 0 + 1 = 1
                 minIndex = i;
                 minCoordinate = p.coordinates(); // new min
-            }
-            else
-            if (minCoordinate[0] == current[0]) {
+            } else if (minCoordinate[0] == current[0]) {
                 if (minCoordinate[1] > current[1]) { //2.0 < 3.0 so set minIndex = 2.0
                     minIndex = i;
                     minCoordinate = p.coordinates();
-                }
-                else minIndex = minIndex;
+                } else minIndex = minIndex;
             }
         }
-        System.out.println(minIndex);
         return minIndex;
     }
 
@@ -106,6 +103,7 @@ public class Triangle implements TwoDShape, Positionable {
     public List<? extends Point> getPosition() {
         return position;
     }
+
     /**
      * @return the number of sides of this triangle, which is always set to three
      */
@@ -125,12 +123,11 @@ public class Triangle implements TwoDShape, Positionable {
     @Override
     public boolean isMember(List<? extends Point> vertices) {
         if (vertices.size() != 3)
-            return false ;
-        else
-        if(area() == 0)
+            return false;
+        else if (area() == 0)
             return false;
         else
-        return true ;
+            return true;
 
     }
 
@@ -146,9 +143,9 @@ public class Triangle implements TwoDShape, Positionable {
         Point p2 = position.get(1);
         Point p3 = position.get(2);
         if (Math.round((p1.coordinates())[0]) == Math.round((p2.coordinates())[0]) && Math.round((p2.coordinates())[0]) == Math.round((p3.coordinates())[0])
-            && Math.round((p1.coordinates())[1]) == Math.round((p2.coordinates())[1]) && Math.round((p2.coordinates())[1]) == Math.round((p3.coordinates())[1]))
-             return;
-        else{
+                && Math.round((p1.coordinates())[1]) == Math.round((p2.coordinates())[1]) && Math.round((p2.coordinates())[1]) == Math.round((p3.coordinates())[1]))
+            return;
+        else {
             ((position.get(0)).coordinates())[0] = Math.round((position.get(0).coordinates())[0]);
             ((position.get(0)).coordinates())[1] = Math.round((position.get(0).coordinates())[1]);
 
@@ -156,7 +153,7 @@ public class Triangle implements TwoDShape, Positionable {
             ((position.get(1)).coordinates())[1] = Math.round((position.get(1).coordinates())[1]);
 
             ((position.get(2)).coordinates())[0] = Math.round((position.get(2).coordinates())[0]);
-            ((position.get(2)).coordinates())[1] =  Math.round((position.get(2).coordinates())[1]);
+            ((position.get(2)).coordinates())[1] = Math.round((position.get(2).coordinates())[1]);
         }
         // TODO
     }
@@ -179,7 +176,7 @@ public class Triangle implements TwoDShape, Positionable {
         double x1y3 = p1Coord[0] * p3Coord[1];
         double x2y1 = p2Coord[0] * p1Coord[1];
         double x3y2 = p2Coord[0] * p2Coord[1];
-        double sum = x1y1 + x2y3 + x3y1 + x1y3 -x2y1 - x3y2;
+        double sum = x1y1 + x2y3 + x3y1 + x1y3 - x2y1 - x3y2;
         sum = Math.abs(sum);
         return (sum * 0.5);
     }
@@ -192,15 +189,33 @@ public class Triangle implements TwoDShape, Positionable {
         Point p2 = position.get(1);
         Point p3 = position.get(2);
 
-        return (distance(p1,p2) + distance(p2,p3) + distance(p3,p1));
+        return (distance(p1, p2) + distance(p2, p3) + distance(p3, p1));
 
     }
-    public double distance(Point p1, Point p2){
+
+    public double distance(Point p1, Point p2) {
         double[] p1Coor = p1.coordinates();
-        double [] p2Coor = p2.coordinates();
-        double x = Math.pow((p2Coor[0] - p1Coor[0]),2);
+        double[] p2Coor = p2.coordinates();
+        double x = Math.pow((p2Coor[0] - p1Coor[0]), 2);
         double y = Math.pow((p2Coor[1] - p1Coor[1]), 2);
         double dist = Math.pow((x + y), 0.5);
         return dist;
     }
+
+    public double lowestX() {
+        return ((position.get(0)).coordinates())[0];
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    public String toString(){
+        return "Triangle " + "[" + ((position.get(0)).coordinates())[0] + "," + ((position.get(0)).coordinates())[1] + ")" +
+                ", " + "(" + ((position.get(1)).coordinates())[0] + "," + ((position.get(1)).coordinates())[1] + ")" +
+                ", " + "(" + ((position.get(2)).coordinates())[0] + "," + ((position.get(2)).coordinates())[1] + ")" + "]";
+    }
 }
+

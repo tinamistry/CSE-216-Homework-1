@@ -7,9 +7,9 @@ public class Quadrilateral implements TwoDShape, Positionable {
     List<Point> position = new ArrayList<>();
     List<TwoDPoint> vertices;
 
-
     public Quadrilateral(List<TwoDPoint> vertices) {
         this.vertices = vertices;
+        setPosition(vertices);
         // TODO
     }
 
@@ -232,5 +232,20 @@ public class Quadrilateral implements TwoDShape, Positionable {
         Point p3 = position.get(2);
         Point p4 = position.get(3);
         return (distance(p1,p2) + distance(p2,p3) + distance(p3,p4) + distance(p4,p1));
+    }
+
+    public double lowestX(){
+        return ((position.get(0)).coordinates())[0];
+    }
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+    public String toString(){
+        return "Quadrilateral [" + "(" + ((position.get(0)).coordinates())[0] + "," + ((position.get(0)).coordinates())[1] + ")" +
+                ", " + "(" + ((position.get(1)).coordinates())[0] + "," + ((position.get(1)).coordinates())[1] + ")" +
+                ", " + "(" + ((position.get(2)).coordinates())[0] + "," + ((position.get(2)).coordinates())[1] + ")" +
+                ", " + "(" + ((position.get(3)).coordinates())[0] + "," + ((position.get(3)).coordinates())[1] + ")" +
+                "]";
     }
 }

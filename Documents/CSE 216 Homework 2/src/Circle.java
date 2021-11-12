@@ -6,6 +6,8 @@ public class Circle implements TwoDShape, Positionable {
 
     private TwoDPoint center;
     private double radius;
+    private TwoDPoint position;
+
 
     public Circle(double x, double y, double r) {
         this.center = new TwoDPoint(x, y);
@@ -21,7 +23,10 @@ public class Circle implements TwoDShape, Positionable {
     @Override
     public void setPosition(List<? extends Point> points) {
         // TODO
-        center = (TwoDPoint) points.get(0);
+        position = (TwoDPoint) points.get(0);
+        if(!(points.get(0) instanceof TwoDPoint) ) {
+            throw new IllegalArgumentException("Input List does not consist of TwoDPoint instances");
+        }
     }
     /**
      * @return the center of this circle as an immutable singleton list
@@ -77,5 +82,15 @@ public class Circle implements TwoDShape, Positionable {
         p = p/100;
         return p; // TODO
     }
+    public double lowestX(){
+        return (center.coordinates())[0];
+    }
 
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+    public String toString(){
+        return "Circle " + "[center: " + (center.coordinates())[0] + ", " + (center.coordinates())[1] + "; radius: " + radius + "]";
+    }
 }

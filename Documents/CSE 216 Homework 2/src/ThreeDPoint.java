@@ -21,4 +21,8 @@ public class ThreeDPoint implements Point {
         // TODO
     }
 
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

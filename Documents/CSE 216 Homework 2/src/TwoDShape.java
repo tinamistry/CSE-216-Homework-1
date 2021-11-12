@@ -5,7 +5,7 @@ import java.util.List;
  * to able to specify the number of sides of such a form and implement a method to check whether the vertices of an
  * instance is a valid set of vertices for that class.
  */
-public interface TwoDShape {
+public interface TwoDShape extends Comparable {
 
     /**
      * @return the number of sides of the two-dimensional shape
@@ -20,4 +20,9 @@ public interface TwoDShape {
      * type meant to implement triangles.
      */
     boolean isMember(List<? extends Point> vertices);
+
+    double area();
+
+    double lowestX();
+
 }
